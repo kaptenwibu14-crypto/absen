@@ -1,5 +1,4 @@
-[index_Version4.html](https://github.com/user-attachments/files/22246831/index_Version4.html)
-<!DOCTYPE html>
+[index_Version5.html](https://github.com/user-attachments/files/22246923/index_Version5.html)[Uploading index<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -21,6 +20,7 @@
             border: 1px solid #4b5563;
             background-color: #374151;
             color: #d1d5db;
+            font-size: 1rem;
         }
         .btn-primary {
             background-color: #fff;
@@ -35,49 +35,62 @@
             background-color: #374151;
         }
         .table-image {
-            max-width: 80px;
-            max-height: 80px;
+            max-width: 60px;
+            max-height: 60px;
             object-fit: cover;
         }
-        /* Ubah warna radio */
         input[type="radio"].form-radio:checked {
             accent-color: #fff;
         }
-        /* Fokus input dan tombol jadi putih */
         .form-input:focus, .btn-primary:focus {
             outline: 2px solid #fff !important;
             outline-offset: 2px !important;
             box-shadow: none !important;
         }
+        @media (max-width: 640px) {
+            .container {
+                padding: 1rem !important;
+            }
+            h1 {
+                font-size: 1.5rem;
+            }
+            h2 {
+                font-size: 1.1rem;
+            }
+            .form-input, .btn-primary {
+                font-size: 1rem;
+                padding: 0.75rem 1rem;
+            }
+        }
     </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
-    <div class="container p-8 w-full max-w-4xl mx-auto space-y-8">
-        <h1 class="text-3xl font-bold text-center text-gray-100">Sistem Absensi Siswa</h1>
+<body class="flex items-center justify-center min-h-screen p-2 sm:p-4 bg-gray-900">
+    <div class="container w-full max-w-4xl mx-auto space-y-8 p-4 sm:p-8">
+        <h1 class="text-2xl sm:text-3xl font-bold text-center text-gray-100 mb-2">Sistem Absensi Siswa</h1>
 
         <!-- Formulir Absensi -->
-        <div class="space-y-6">
-            <h2 class="text-2xl font-semibold text-gray-200">Formulir Absensi</h2>
-            <form id="absenForm" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="space-y-4">
+            <h2 class="text-xl sm:text-2xl font-semibold text-gray-200">Formulir Absensi</h2>
+            <form id="absenForm" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <!-- Nama Siswa -->
                 <div class="space-y-2">
                     <label for="nama" class="block text-sm font-medium text-gray-400">Nama Siswa</label>
-                    <input type="text" id="nama" class="w-full px-4 py-2 form-input rounded-md focus:outline-none" placeholder="Masukkan nama siswa" required>
+                    <input type="text" id="nama" class="form-input rounded-md w-full focus:outline-none" placeholder="Masukkan nama siswa" required>
                 </div>
                 <!-- Kelas -->
                 <div class="space-y-2">
                     <label for="kelas" class="block text-sm font-medium text-gray-400">Kelas</label>
-                    <input type="text" id="kelas" class="w-full px-4 py-2 form-input rounded-md focus:outline-none" placeholder="Contoh: 10A" required>
+                    <input type="text" id="kelas" class="form-input rounded-md w-full focus:outline-none" placeholder="Contoh: 10A" required>
                 </div>
                 <!-- Surat Keterangan (Unggah File) -->
-                <div class="space-y-2">
+                <div class="space-y-2 sm:col-span-2">
                     <label for="suratKeteranganFile" class="block text-sm font-medium text-gray-400">Unggah Foto Surat Keterangan (Opsional)</label>
-                    <input type="file" id="suratKeteranganFile" accept="image/*" class="w-full px-4 py-2 form-input rounded-md focus:outline-none">
+                    <input type="file" id="suratKeteranganFile" accept="image/*" class="form-input rounded-md w-full focus:outline-none">
                 </div>
                 <!-- Keterangan -->
-                <div class="col-span-1 md:col-span-2 space-y-2">
+                <div class="sm:col-span-2 space-y-2">
                     <label class="block text-sm font-medium text-gray-400">Keterangan</label>
-                    <div class="flex items-center space-x-4">
+                    <div class="flex items-center space-x-8">
                         <label class="inline-flex items-center text-gray-400">
                             <input type="radio" name="keterangan" value="Hadir" class="form-radio rounded-full" checked>
                             <span class="ml-2">Hadir</span>
@@ -89,27 +102,27 @@
                     </div>
                 </div>
                 <!-- Tombol Simpan -->
-                <div class="col-span-1 md:col-span-2">
-                    <button type="submit" class="w-full px-4 py-2 font-semibold rounded-md btn-primary focus:outline-none">Simpan Absensi</button>
+                <div class="sm:col-span-2">
+                    <button type="submit" class="w-full px-4 py-2 font-semibold rounded-md btn-primary focus:outline-none mt-2">Simpan Absensi</button>
                 </div>
             </form>
             <!-- Message Box -->
-            <div id="messageBox" class="hidden p-3 mt-4 text-sm text-center rounded-md"></div>
+            <div id="messageBox" class="hidden p-3 mt-2 text-sm text-center rounded-md"></div>
         </div>
 
         <!-- Tabel Absensi -->
-        <div class="mt-8">
-            <h2 class="text-2xl font-semibold text-gray-200 mb-4">Data Absensi Hari Ini</h2>
+        <div>
+            <h2 class="text-xl sm:text-2xl font-semibold text-gray-200 mb-2">Data Absensi Hari Ini</h2>
             <div class="overflow-x-auto rounded-md border border-gray-700">
-                <table class="min-w-full divide-y divide-gray-700">
+                <table class="min-w-full divide-y divide-gray-700 text-xs sm:text-sm">
                     <thead class="table-header">
                         <tr>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Tanggal</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Nama</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Kelas</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Keterangan</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Surat Keterangan</th>
-                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Aksi</th>
+                            <th class="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Tanggal</th>
+                            <th class="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Nama</th>
+                            <th class="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Kelas</th>
+                            <th class="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Keterangan</th>
+                            <th class="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Surat Keterangan</th>
+                            <th class="px-2 sm:px-6 py-2 sm:py-3 text-left text-xs font-medium text-gray-400 uppercase tracking-wider">Aksi</th>
                         </tr>
                     </thead>
                     <tbody id="absensiTableBody" class="bg-gray-800 divide-y divide-gray-700">
@@ -118,7 +131,7 @@
                 </table>
             </div>
             <div class="flex justify-end mt-4">
-                <button id="btnExport" class="px-4 py-2 font-semibold rounded-md btn-primary focus:outline-none">Ekspor ke Excel</button>
+                <button id="btnExport" class="px-4 py-2 font-semibold rounded-md btn-primary focus:outline-none text-xs sm:text-base">Ekspor ke Excel</button>
             </div>
         </div>
     </div>
@@ -152,14 +165,14 @@
         function renderTable() {
             absensiTableBody.innerHTML = dataAbsensi.map((data, idx) => `
                 <tr class="border-b border-gray-700">
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">${data.tanggal}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-100">${data.nama}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">${data.kelas}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">${data.keterangan}</td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                    <td class="px-2 sm:px-6 py-2 whitespace-nowrap text-xs sm:text-sm text-gray-300">${data.tanggal}</td>
+                    <td class="px-2 sm:px-6 py-2 whitespace-nowrap text-xs sm:text-sm font-medium text-gray-100">${data.nama}</td>
+                    <td class="px-2 sm:px-6 py-2 whitespace-nowrap text-xs sm:text-sm text-gray-300">${data.kelas}</td>
+                    <td class="px-2 sm:px-6 py-2 whitespace-nowrap text-xs sm:text-sm text-gray-300">${data.keterangan}</td>
+                    <td class="px-2 sm:px-6 py-2 whitespace-nowrap text-xs sm:text-sm text-gray-300">
                         ${data.imageData ? `<img src="${data.imageData}" class="table-image rounded-md">` : '-'}
                     </td>
-                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-300">
+                    <td class="px-2 sm:px-6 py-2 whitespace-nowrap text-xs sm:text-sm text-gray-300">
                         <button onclick="hapusData(${idx})" class="text-red-500 hover:underline">Hapus</button>
                     </td>
                 </tr>
@@ -257,4 +270,4 @@
         renderTable();
     </script>
 </body>
-</html>
+</html>_Version5.html…]()
